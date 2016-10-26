@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	.main{
+		width:600px;
+		height:600px;
+		border: 1px solid #ccc;
+	}
+</style>
+<body id="APP">
+<a href="#aaa">aaaa</a>
+<a href="#bbb">aaaa</a>
+	<div class="main">
+		
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+	<script>
+	var router=function(config) {
+		var app=document.getElementById("APP")
+		app.onhashchange=function(event) {
+			var index=window.location.hash;
+			for(var i in config){
+				if(config[i].name==index){
+					$(config[i].innerSelector).load(config[i].path,function() {
+						config[i].onload()
+					})
+				}
+			}
+		}
+	}
+	 router([
+	 	{
+	 		name:"#aaa",
+	 		innerSelector:".main",
+	 		path:"./a.html",
+	 		onload:function(argument) {
+	 			alert("a加载完成")
+	 		}
+	 	},
+	 	{
+	 		name:"#bbb",
+	 		innerSelector:".main",
+	 		path:"./b.html",
+	 		onload:function(argument) {
+	 			alert("b加载完成")
+	 		}
+	 	},
+	 		])
+	 
+		
+	</script>
+</body>
+</html>
